@@ -5,6 +5,8 @@ eps = 1e-10;    % wymagana dokładność
 t_k = 2;      % czas zakończenia symulacji [s]
 dt = 0.02;      % długość kroku czasowego [s]
 
+g = [0 -9.81]';
+
 % środki mas członów (posłużą za lokalne układy współrzędnych)
 c.x = [-0.95 0.4 0.6 -0.15 -0.35 -0.05 0.25 0.35 0.4 0.6];
 c.y = [0.55 0.75 0.5 0.35 0.85 0.65 0.4 0 0.35 -0.15];
