@@ -2,7 +2,7 @@
 
 % parametry symulacji
 eps = 1e-10;    % wymagana dokładność
-t_k = 2;      % czas zakończenia symulacji [s]
+t_k = 5;      % czas zakończenia symulacji [s]
 dt = 0.02;      % długość kroku czasowego [s]
 
 g = [0 -9.81]';
