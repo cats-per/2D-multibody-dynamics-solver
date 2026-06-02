@@ -2,7 +2,7 @@ function Fq = Jakobian(q)
 % funkcja automatycznie wyznaczająca jakobian na podstawie danych z pliku
 % wejściowego
 
-Dane_PD1;
+Dane_PD2;
 
 Fq = [];
 Om = [0 -1;
@@ -17,6 +17,8 @@ for i=1:length(c.x)
     R(i).R = Rot(fi(i));
     r(i).r = [q(3*i-2) q(3*i-1)]';
 end
+
+% 1. PRZEGUBY
 
 for i = 1:length(przegub)
     fq = zeros(2, 3 * numel(c.x));
@@ -42,6 +44,8 @@ for i = 1:length(przegub)
 
     Fq = [Fq; fq];
 end
+
+% 3. PARY POSTĘPOWE
 
 if postepowe
 
@@ -86,6 +90,8 @@ if postepowe
               fq_poprz];        
     end
 end
+
+% 4. PARY POSTĘPOWE KIERUJĄCE
 
 if postepowe_kierujace
 

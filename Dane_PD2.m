@@ -70,24 +70,20 @@ przegub = wsp_lokalne(przegub, c);
 przeguby_kierujace = false;
 
 % pary postępowe
-postepowe = false;
+postepowe = true;
+
+postep(1).ciala = [7 8];
+postep(1).pkt_pocz = [0.2 0.6]';
+postep(1).pkt_kon = [0.4 -0.2]';
+
+postep(2).ciala = [9 10];
+postep(2).pkt_pocz = [0.3 0.6]';
+postep(2).pkt_kon = [0.7 -0.4]';
+
+postep = policzoffset(postep, c);
 
 % pary postępowe kierujące
-postepowe_kierujace = true;
-
-postep_kier(1).ciala = [7 8];
-postep_kier(1).pkt_pocz = [0.2 0.6]';
-postep_kier(1).pkt_kon = [0.4 -0.2]';
-postep_kier(1).k = 2e5;
-postep_kier(1).b = 5e3;
-
-postep_kier(2).ciala = [9 10];
-postep_kier(2).pkt_pocz = [0.3 0.6]';
-postep_kier(2).pkt_kon = [0.7 -0.4]';
-postep_kier(2).k = 2e5;
-postep_kier(2).b = 3e3;
-
-postep_kier = policzoffset(postep_kier, c);
+postepowe_kierujace = false;
 
 % siły
 sily = true;
@@ -96,6 +92,25 @@ sila(1).cialo = 1;
 sila(1).punkt = [-1.2 0.6]';
 sila(1).wartosc = 1000;
 sila(1).kat = 225;
+sila(1).wekt = 1000 * Rot(deg2rad(225)) * [1 0]';
+
+% tłumiki
+tlumiki = true;
+
+tlumik(1).para = 1;
+tlumik(1).b = 5e3;
+
+tlumik(2).para = 2;
+tlumik(2).b = 3e3;
+
+% sprężyny
+sprezyny = true;
+
+sprezyna(1).para = 1;
+sprezyna(1).k = 2e5;
+
+sprezyna(2).para = 1;
+sprezyna(2).k = 2e5;
 
 % czujniki
 czujniki = false;

@@ -1,7 +1,7 @@
 function F = rWiez(q, t)
 % funkcja licząca r-nia więzów w chwili t
 
-Dane_PD1
+Dane_PD2;
 
 F = [];
 R = struct();
