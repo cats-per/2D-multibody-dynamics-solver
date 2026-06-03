@@ -94,6 +94,8 @@ sila(1).wartosc = 1000;
 sila(1).kat = 225;
 sila(1).wekt = 1000 * Rot(deg2rad(225)) * [1 0]';
 
+sila(1).s = [-0.25 0.05]';
+
 % tłumiki
 tlumiki = true;
 
@@ -108,9 +110,11 @@ sprezyny = true;
 
 sprezyna(1).para = 1;
 sprezyna(1).k = 2e5;
+sprezyna(1).d0 = sqrt(0.68);
 
-sprezyna(2).para = 1;
+sprezyna(2).para = 2;
 sprezyna(2).k = 2e5;
+sprezyna(2).d0 = sqrt(1.16);
 
 % czujniki
 czujniki = false;

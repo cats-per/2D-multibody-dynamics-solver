@@ -20,5 +20,12 @@ end
 
 %% pętla całkująca do zadanego czasu końcowego
 while t < t_k
+    Fq = Jakobian(q);
+    S = Sily(q, dq, d2q) + Q;
+    Gamma = Przyspieszenie(q, dq, t);
+    Lewa = [M Fq';
+            Fq zeros(length(Gamma))];
+    Prawa = [S; 
+             Gamma];
     t = t + dt;
 end
