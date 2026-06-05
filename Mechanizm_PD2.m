@@ -5,12 +5,13 @@ clear all;
 Dane_PD2;
 
 n_u = length(c.x);
+t = 0;
 
 % macierz mas i składowa grawitacji wektora sił
 M = Masy();
 Q = Grawitacja();
 
-q = zeros(n_u, 1); dq = zeros(n_u, 1); d2q = zeros(n_u, 1);
+q = zeros(n_u * 3, 1); dq = zeros(n_u * 3, 1); d2q = zeros(n_u * 3, 1);
 
 % przypisanie wartości dla chwili t0
 for i = 1:n_u
@@ -27,5 +28,12 @@ while t < t_k
             Fq zeros(length(Gamma))];
     Prawa = [S; 
              Gamma];
-    t = t + dt;
+    dY=H(t,M, q, dq, Fq, S, Gamma);
+    [tc,Y]=Calkuj(t_k, q);
+    q=q+dq*dt+0.5*d2q*dt^2;
+    dq=dq+d2q*dt;
+    t=t+dt;
 end
+
+% postprocessing
+%postproc()
