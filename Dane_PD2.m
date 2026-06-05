@@ -2,15 +2,16 @@
 
 % parametry symulacji
 eps = 1e-10;    % wymagana dokładność
-t_k = 2;      % czas zakończenia symulacji [s]
+t_k = 5;      % czas zakończenia symulacji [s]
 dt = 0.02;      % długość kroku czasowego [s]
 
-% środki mas członów (posłużą za lokalne układy współrzędnych)
-%c.x = [-0.95 0.4 0.6 -0.15 -0.35 -0.05 0.25 0.35 0.4 0.6];
-%c.y = [0.55 0.75 0.5 0.35 0.85 0.65 0.4 0 0.35 -0.15];
+g = [0 -9.81]';
 
-c.x = [0.0 0.4 0.15 0.05 0.45 0.35 0.4 0.65 1.05 1.2];
-c.y = [0.85 0.75 0.45 0.15 0.6 0.2 0.1 0.25 0.3 -0.25];
+% środki mas członów (posłużą za lokalne układy współrzędnych)
+c.x = [-0.95 0.4 0.6 -0.15 -0.35 -0.05 0.25 0.35 0.4 0.6];
+c.y = [0.55 0.75 0.5 0.35 0.85 0.65 0.4 0 0.35 -0.15];
+c.m = [120 120 120 220 9 5 5 5 7 7];
+c.I = [4 6 4 40 0.5 0.5 0.5 0.5 0.5 0.5];
 
 % pary przegubowe
 przeguby = true;
@@ -69,30 +70,54 @@ przegub = wsp_lokalne(przegub, c);
 przeguby_kierujace = false;
 
 % pary postępowe
-postepowe = false;
+postepowe = true;
+
+postep(1).ciala = [7 8];
+postep(1).pkt_pocz = [0.2 0.6]';
+postep(1).pkt_kon = [0.4 -0.2]';
+
+postep(2).ciala = [9 10];
+postep(2).pkt_pocz = [0.3 0.6]';
+postep(2).pkt_kon = [0.7 -0.4]';
+
+postep = policzoffset(postep, c);
 
 % pary postępowe kierujące
-postepowe_kierujace = true;
+postepowe_kierujace = false;
 
-postep_kier(1).ciala = [7 8];
-postep_kier(1).pkt_pocz = [0.2 0.6]';
-postep_kier(1).pkt_kon = [0.4 -0.2]';
-postep_kier(1).s = 'l_mn + a_mn * sin(omega_mn * t + fi_mn)';
-l_mn = sqrt(0.2^2 + 0.8^2); a_mn = -0.05; omega_mn = 1; fi_mn = 0;
+% siły
+sily = true;
 
-postep_kier(2).ciala = [9 10];
-postep_kier(2).pkt_pocz = [0.3 0.6]';
-postep_kier(2).pkt_kon = [0.7 -0.4]';
-postep_kier(2).s = 'l_gh + a_gh * sin(omega_gh * t + fi_gh)';
-l_gh = sqrt(0.4^2 + 1); a_gh = -0.05; omega_gh = 2; fi_gh = 0;
+sila(1).cialo = 1;
+sila(1).punkt = [-1.2 0.6]';
+sila(1).wartosc = 1000;
+sila(1).kat = 225;
+sila(1).wekt = 1000 * Rot(deg2rad(225)) * [1 0]';
 
-postep_kier = policzoffset(postep_kier, c);
+sila(1).s = [-0.25 0.05]';
+
+% tłumiki
+tlumiki = true;
+
+tlumik(1).para = 1;
+tlumik(1).b = 5e3;
+
+tlumik(2).para = 2;
+tlumik(2).b = 3e3;
+
+% sprężyny
+sprezyny = true;
+
+sprezyna(1).para = 1;
+sprezyna(1).k = 2e5;
+sprezyna(1).d0 = sqrt(0.68);
+
+sprezyna(2).para = 2;
+sprezyna(2).k = 2e5;
+sprezyna(2).d0 = sqrt(1.16);
 
 % czujniki
 czujniki = false;
 
 czujnik(1).czlon = 7;
 czujnik(1).r0 = [1.0 -0.5]';
-
-% czujnik(2).czlon = 2;
-% czujnik(2).r0 = [-0.25 0.4]';
