@@ -3,10 +3,12 @@ function postproc()
 % przyspieszeń liniowych i kątowych dla wszystkich członów mechanizmu i
 % zdefiniowanych czujników oraz zapisująca te dane do pliku Wynik.csv
 % wykresy i plik csv zapisywane są w podfolderze Wyniki\
+% w przypadku wybrania "cancel" w okienku pytającym o wydruk danych o
+% członach zostanie pominięte wyświetlanie i zapisywanie wyników o członach
 
 close all;
-Dane_PD1;
-wynik = load("wynik_PD1.mat");
+Dane_PD2;
+wynik = load("wynik_PD2.mat");
 
 disp("Zaczynam postprocessing");
 
@@ -53,7 +55,7 @@ ustawienia.rozmiarCzcionkiBig = 15; % title
 ustawienia.wyswietl = 'off';
 
 legenda.r = ["r_x", "r_y"];
-legenda.fi = "\phi";
+%legenda.fi = "\phi";
 legenda.dr = ["v_x", "v_y"];
 legenda.dfi = "\omega";
 legenda.d2r = ["a_x", "a_y"];
@@ -62,7 +64,7 @@ legenda.trajektoria = "y(x)";
 
 label.x = "czas [s]";
 label.r = "położenie [m]";
-label.fi = "\phi [rad]";
+%label.fi = "\phi [rad]";
 label.dr = "v [m/s]";
 label.dfi = "\omega [rad/s]";
 label.d2r = "a [m/s^2]";
@@ -74,7 +76,7 @@ for i = 1:numel(c.x)
     % wczytanie rozwiązań położeń, prędkości i przyspieszeń dla środka masy
     % i-tego członu
     r = Q(3*i-2:3*i-1, :);
-    fi = Q(3*i, :);
+    %fi = Q(3*i, :);
     dr = DQ(3*i-2:3*i-1, :);
     dfi = DQ(3*i, :);
     d2r = D2Q(3*i-2:3*i-1, :);
@@ -89,7 +91,7 @@ for i = 1:numel(c.x)
 
     % zdefiniowanie nazw wykresów i ich opisów
     tytul.r = strcat("położenie członu ", num2str(i));
-    tytul.fi = strcat("kąt obrotu członu ", num2str(i));
+    %tytul.fi = strcat("kąt obrotu członu ", num2str(i));
     tytul.dr = strcat("prędkość liniowa członu ", num2str(i));
     tytul.dfi = strcat("prędkość obrotowa członu ", num2str(i));
     tytul.d2r = strcat("przyspieszenie liniowe członu ", num2str(i));
@@ -97,7 +99,7 @@ for i = 1:numel(c.x)
     tytul.trajektoria = "trajektoria członu " + num2str(i);
 
     tytul.plik.r = "czlon_" + num2str(i) + "_r";
-    tytul.plik.fi = "czlon_" + num2str(i) + "_fi";
+    %tytul.plik.fi = "czlon_" + num2str(i) + "_fi";
     tytul.plik.dr = "czlon_" + num2str(i) + "_dr";
     tytul.plik.dfi = "czlon_" + num2str(i) + "_dfi";
     tytul.plik.d2r = "czlon_" + num2str(i) + "_d2r";
@@ -106,7 +108,7 @@ for i = 1:numel(c.x)
 
     kolumna.rx = "czlon_" + num2str(i) + "_rx";
     kolumna.ry = "czlon_" + num2str(i) + "_ry";
-    kolumna.fi = "czlon_" + num2str(i) + "_fi";
+    %kolumna.fi = "czlon_" + num2str(i) + "_fi";
     kolumna.vx = "czlon_" + num2str(i) + "_vx";
     kolumna.vy = "czlon_" + num2str(i) + "_vy";
     kolumna.dfi = "czlon_" + num2str(i) + "_dfi";
@@ -120,7 +122,7 @@ for i = 1:numel(c.x)
     Plotuj_r(r, T, tytul.r, legenda.r, label.r, label.x, tytul.plik.r, ustawienia);
     Plotuj_r(dr, T, tytul.dr, legenda.dr, label.dr, label.x, tytul.plik.dr, ustawienia);
     Plotuj_r(d2r, T, tytul.d2r, legenda.d2r, label.d2r, label.x, tytul.plik.d2r, ustawienia);
-    Plotuj_fi(fi, T, tytul.fi, legenda.fi, label.fi, label.x, tytul.plik.fi, ustawienia);
+    %Plotuj_fi(fi, T, tytul.fi, legenda.fi, label.fi, label.x, tytul.plik.fi, ustawienia);
     Plotuj_fi(dfi, T, tytul.dfi, legenda.dfi, label.dfi, label.x, tytul.plik.dfi, ustawienia);
     Plotuj_fi(d2fi, T, tytul.d2fi, legenda.d2fi, label.d2fi, label.x, tytul.plik.d2fi, ustawienia);
     Plotuj_fi(r(2,:), r(1,:), tytul.trajektoria, legenda.trajektoria, "y [m]", "x [m]", tytul.plik.trajektoria, ustawienia);
@@ -129,7 +131,7 @@ for i = 1:numel(c.x)
     % potrzebę pliku csv
     saveTable.(sprintf("%s", kolumna.rx)) = r(1, :)';
     saveTable.(sprintf("%s", kolumna.ry)) = r(2, :)';
-    saveTable.(sprintf("%s", kolumna.fi)) = fi';
+    %saveTable.(sprintf("%s", kolumna.fi)) = fi';
     saveTable.(sprintf("%s", kolumna.vx)) = dr(1, :)';
     saveTable.(sprintf("%s", kolumna.vy)) = dr(2, :)';
     saveTable.(sprintf("%s", kolumna.dfi)) = dfi';

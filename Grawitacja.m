@@ -1,3 +1,4 @@
+% funkcja zwracająca siły ciężkości dla członów
 function G = Grawitacja()
 Dane_PD2;
 
