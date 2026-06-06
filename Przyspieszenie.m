@@ -1,7 +1,7 @@
 function d2q = Przyspieszenie(q, dq, t)
 % funkcja wyznaczająca wektor drugiej pochodnej wektora q po czasie
 
-Dane_PD1;
+Dane_PD2;
 
 gamma = [];
 Fq = Jakobian(q);
@@ -37,9 +37,9 @@ if przeguby_kierujace
 end
 
 if postepowe
-    for i = 1:numel(postep_kier)
-        idi = postep_kier(i).ciala(1);
-        idj = postep_kier(i).ciala(2);
+    for i = 1:numel(postep)
+        idi = postep(i).ciala(1);
+        idj = postep(i).ciala(2);
 
         ri = r(idi).r;
         rj = r(idj).r;
@@ -50,10 +50,10 @@ if postepowe
         Ri = R(idi).R;
         Rj = R(idj).R;
 
-        sa = postep_kier(i).sa;
-        sb = postep_kier(i).sb;
+        sa = postep(i).sa;
+        sb = postep(i).sb;
 
-        u = postep_kier(i).u;
+        u = postep(i).u;
         v = Om * u;
 
         gamma_k_kat = 0;
@@ -110,6 +110,6 @@ if postepowe_kierujace
     end
 end
 
-d2q = Fq \ (gamma);
+d2q = gamma;
 
 end

@@ -3,7 +3,7 @@
 % parametry symulacji
 eps = 1e-10;    % wymagana dokładność
 t_k = 5;      % czas zakończenia symulacji [s]
-dt = 0.02;      % długość kroku czasowego [s]
+dt = 0.0125;      % długość kroku czasowego [s]
 
 g = [0 -9.81]';
 
@@ -117,7 +117,7 @@ sprezyna(2).k = 2e5;
 sprezyna(2).d0 = sqrt(1.16);
 
 % czujniki
-czujniki = false;
+czujniki = true;
 
-czujnik(1).czlon = 7;
-czujnik(1).r0 = [1.0 -0.5]';
+czujnik(1).czlon = 1;
+czujnik(1).r0 = [-1.2 0.6]';
